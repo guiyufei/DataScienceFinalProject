@@ -158,8 +158,9 @@ miss <- data.frame(missingness(as.matrix(sf_data))$missing_values_per_variable)
 
 # Reorganize the data frame
 rownum <-row.names(miss)
-percentage <- percent(miss[,1]/nrow(sf_data))
-miss <- miss %>% mutate(percentage = percentage)
+percentage <- percent(miss[,1] / nrow(sf_data))
+miss <- miss %>% 
+  mutate(percentage = percentage)
 miss <- miss[,c(2,1)]
 colnames(miss) <- c("percentage","number of missingness")
 row.names(miss) <- rownum
@@ -167,8 +168,8 @@ miss %>% kable(caption="Missingness of variables in SF data")
 
 # Do the same thing for NY 
 miss_ny <- data.frame(missingness(as.matrix(ny_data))$missing_values_per_variable)
-rownum_ny <-row.names(miss_ny)
-percentage_ny <- percent(miss_ny[,1]/nrow(ny_data))
+rownum_ny <- row.names(miss_ny)
+percentage_ny <- percent(miss_ny[,1] / nrow(ny_data))
 miss_ny <- miss_ny %>% mutate(percentage = percentage_ny)
 miss_ny <- miss_ny[,c(2,1)]
 colnames(miss_ny) <- c("percentage","number of missingness")
@@ -214,7 +215,11 @@ sf_data <- sf_data %>%
   filter(bedrooms < 16)
 
 # Transform last_sold_price and remove price = 1
-ggplot(sf_data, aes(x = last_sold_price)) + geom_histogram(col="purple4",fill="white")+ggtitle("histogram of log last sold price in SF")+scale_x_log10()+xlab("log last sold price")
+ggplot(sf_data, aes(x = last_sold_price)) +
+  geom_histogram(col="purple4",fill="white") + 
+  ggtitle("histogram of log last sold price in SF") +
+  scale_x_log10() + 
+  xlab("log last sold price")
 
 sf_data <- sf_data %>%
   filter(last_sold_price > 1) %>%
@@ -223,12 +228,20 @@ sf_data <- sf_data %>%
 # Filter out NA tax_value 
 sf_data <- sf_data %>%
   filter(!is.na(tax_value))
-ggplot(sf_data, aes(x = tax_value)) + geom_histogram(col="olivedrab4",fill="white")+ggtitle("histogram of log tax value in SF")+scale_x_log10()+xlab("log tax value")
+ggplot(sf_data, aes(x = tax_value)) + 
+  geom_histogram(col="olivedrab4",fill="white") + 
+  ggtitle("histogram of log tax value in SF") + 
+  scale_x_log10() + 
+  xlab("log tax value")
 sf_data <- sf_data %>%
   mutate(log_tax_value = log(tax_value))
 
 # Remove NA home_size and transform home_size and property_size
-ggplot(sf_data, aes(x = home_size)) + geom_histogram(col="blue",fill="white")+ggtitle("histogram of log home size in SF")+scale_x_log10()+xlab("log home size")
+ggplot(sf_data, aes(x = home_size)) + 
+  geom_histogram(col="blue",fill="white") + 
+  ggtitle("histogram of log home size in SF") +
+  scale_x_log10() +
+  xlab("log home size")
 sf_data <- sf_data %>%
   filter(home_size > 1) %>%
   mutate(log_home_size = log(home_size),
@@ -260,7 +273,11 @@ ny_data <- ny_data %>%
   filter(bedrooms < 21)
 
 # Transform last_sold_price and remove last_sold_price = 1
-ggplot(ny_data, aes(x = last_sold_price)) + geom_histogram(col="darkred",fill="white")+ggtitle("histogram of log last sold price in NYC")+scale_x_log10()+xlab("log last sold price")
+ggplot(ny_data, aes(x = last_sold_price)) +
+  geom_histogram(col="darkred",fill="white") +
+  ggtitle("histogram of log last sold price in NYC") +
+  scale_x_log10() +
+  xlab("log last sold price")
 ny_data <- ny_data %>%
   filter(last_sold_price > 1) %>%
   mutate(log_last_sold_price = log(last_sold_price))
@@ -268,12 +285,20 @@ ny_data <- ny_data %>%
 # Filter NA tax_value 
 ny_data <- ny_data %>%
   filter(!is.na(tax_value))
-ggplot(ny_data, aes(x = last_sold_price)) + geom_histogram(col="indianred2",fill="white")+ggtitle("histogram of log tax value in NYC")+scale_x_log10()+xlab("log tax value")
+ggplot(ny_data, aes(x = last_sold_price)) +
+  geom_histogram(col="indianred2",fill="white") +
+  ggtitle("histogram of log tax value in NYC") +
+  scale_x_log10() +
+  xlab("log tax value")
 ny_data <- ny_data %>%
   mutate(log_tax_value = log(tax_value))
 
 # Remove NA home_size and transform home_size and property_size
-ggplot(ny_data, aes(x = last_sold_price)) + geom_histogram(col="orange1",fill="white")+ggtitle("histogram of log home size in NYC")+scale_x_log10()+xlab("log home size")
+ggplot(ny_data, aes(x = last_sold_price)) +
+  geom_histogram(col="orange1",fill="white") +
+  ggtitle("histogram of log home size in NYC") + 
+  scale_x_log10() +
+  xlab("log home size")
 ny_data <- ny_data %>%
   filter(home_size > 1) %>%
   mutate(log_home_size = log(home_size),
@@ -304,31 +329,62 @@ We compare the distribution of the variables before and after transformation in 
 library(gridExtra)
 library(grid)
 # Comparing the before and after transforming tax_value 
-tax_value_notran <- ggplot(sf_data, aes(x = tax_value)) + geom_histogram(colour = "darkgreen", fill = "white")+ggtitle("Before transformation")
-tax_value_tran <- ggplot(sf_data, aes(x = tax_value)) + geom_histogram(colour = "white", fill = "darkgreen")+ggtitle("After log transformation")+scale_x_log10()
+tax_value_notran <- 
+  ggplot(sf_data, aes(x = tax_value)) + 
+  geom_histogram(colour = "darkgreen", fill = "white") +
+  ggtitle("Before transformation")
+tax_value_tran <- 
+  ggplot(sf_data, aes(x = tax_value)) + 
+  geom_histogram(colour = "white", fill = "darkgreen") + 
+  ggtitle("After log transformation") +
+  scale_x_log10()
 
 # Comparing the before and after transforming home_size
-home_value_notran <- ggplot(sf_data, aes(x = home_size)) + geom_histogram(colour = "darkblue", fill = "white")+ggtitle("Before transformation")
-home_value_tran <- ggplot(sf_data, aes(x = home_size)) + geom_histogram(colour = "white", fill = "darkblue")+ggtitle("After log transformation")+scale_x_log10()
+home_value_notran <- 
+  ggplot(sf_data, aes(x = home_size)) + 
+  geom_histogram(colour = "darkblue", fill = "white") + 
+  ggtitle("Before transformation")
+home_value_tran <- 
+  ggplot(sf_data, aes(x = home_size)) + 
+  geom_histogram(colour = "white", fill = "darkblue") +
+  ggtitle("After log transformation") +
+  scale_x_log10()
 
-grid.arrange(tax_value_notran, tax_value_tran, home_value_notran,home_value_tran, top = "Comparing Before and After Transformation for Variable in SF data")
+grid.arrange(tax_value_notran, 
+             tax_value_tran, 
+             home_value_notran,
+             home_value_tran, 
+             top = "Comparing Before and After Transformation for Variable in SF data")
 ```
 
 ```{r, message=FALSE}
 # Comparing the before and after transforming tax_value 
-tax_value_notran <- ggplot(ny_data, aes(x = tax_value)) + 
+tax_value_notran <- 
+  ggplot(ny_data, aes(x = tax_value)) + 
   geom_histogram(colour = "red", fill = "white") +
   ggtitle("Before transformation")
-tax_value_tran <- ggplot(ny_data, aes(x = tax_value)) + 
+tax_value_tran <- 
+  ggplot(ny_data, aes(x = tax_value)) + 
   geom_histogram(colour = "white", fill = "red") + 
   ggtitle("After log transformation") + 
   scale_x_log10()
 
 # Comparing the before and after transforming home_size
-home_value_notran <- ggplot(ny_data, aes(x = home_size)) + geom_histogram(colour = "darkorange", fill = "white")+ggtitle("Before transformation")
-home_value_tran <- ggplot(ny_data, aes(x = home_size)) + geom_histogram(colour = "white", fill = "darkorange")+ggtitle("After log transformation")+scale_x_log10()
+home_value_notran <- 
+  ggplot(ny_data, aes(x = home_size)) + 
+  geom_histogram(colour = "darkorange", fill = "white") + 
+  ggtitle("Before transformation")
+home_value_tran <- 
+  ggplot(ny_data, aes(x = home_size)) + 
+  geom_histogram(colour = "white", fill = "darkorange") +
+  ggtitle("After log transformation") +
+  scale_x_log10()
 
-grid.arrange(tax_value_notran, tax_value_tran, home_value_notran,home_value_tran, top = "Comparing Before and After Transformation for Variable in NY data")
+grid.arrange(tax_value_notran, 
+             tax_value_tran, 
+             home_value_notran,
+             home_value_tran, 
+             top = "Comparing Before and After Transformation for Variable in NY data")
 ```
 
 #### 3.1.4 Real Estates Clusters based on Location
@@ -347,8 +403,11 @@ wss <- (nrow(mydata)-1) * sum(apply(mydata,2,var))
 for (i in 2:20) wss[i] <- sum(kmeans(mydata,
                                      centers=i, iter.max = 20)$withinss)
 
-plot(1:20, wss, type="b", xlab="Number of Clusters",
-     ylab="Within groups sum of squares", main = "Within groups sum of squares vs. Number of clusters")
+plot(1:20, wss, 
+     type="b", 
+     xlab="Number of Clusters",
+     ylab="Within groups sum of squares", 
+     main = "Within groups sum of squares vs. Number of clusters")
 
 # NY
 ny_location <- cbind(ny_data$latitude, ny_data$longitude)
@@ -359,8 +418,11 @@ wss <- (nrow(mydata)-1) * sum(apply(mydata,2,var))
 for (i in 2:20) wss[i] <- sum(kmeans(mydata,
                                      centers=i, iter.max = 20)$withinss)
 
-plot(1:20, wss, type="b", xlab="Number of Clusters",
-     ylab="Within groups sum of squares", main = "Within groups sum of squares vs. Number of clusters")
+plot(1:20, wss, 
+     type="b", 
+     xlab="Number of Clusters",
+     ylab="Within groups sum of squares", 
+     main = "Within groups sum of squares vs. Number of clusters")
 ```
 
 According to the above plots, we see that when `k` is greater than 15, the within cluster sum of squares won't decrease much in magnitude, so we choose `k` as 15. Then we run k-means on the date set in both cities and merge the cluster results into the original data set.
@@ -406,17 +468,33 @@ library(ggmap)
 sf_data_new <- sf_data %>% 
   filter(!is.na(log_last_sold_price)) 
 
-loghigh <-qmplot(longitude, latitude, data = sf_data_new %>%
-                   filter(log_last_sold_price>14.5 & log_last_sold_price <19), 
+loghigh <-
+  qmplot(longitude, latitude, data = sf_data_new %>%
+                   filter(log_last_sold_price>14.5 & log_last_sold_price <19),
                  colour = log_last_sold_price) +
   scale_colour_gradient(low = "red", 
                         high="green",
                         guide= guide_legend(title = "log of last sold price \nfrom 14.5 to above 19 \n(more than $1983000)")) + 
   ggtitle("San Francisco Last Sold Price Graph I")
 
-logmid <- qmplot(longitude, latitude, data = sf_data_new %>% filter(log_last_sold_price>13.5 & log_last_sold_price <=14.5), colour = log_last_sold_price)+scale_colour_gradient(low = "yellow",high="blue",na.value="white",guide= guide_legend(title = "log of last sold price \nfrom 13.5 to 14.5 \n($730000 to $1982999)")) + ggtitle("San Francisco Last Sold Price Graph II")
+logmid <- 
+  qmplot(longitude, latitude, data = sf_data_new %>%
+           filter(log_last_sold_price>13.5 & log_last_sold_price <=14.5), 
+         colour = log_last_sold_price) +
+  scale_colour_gradient(low = "yellow",
+                        high="blue",
+                        na.value="white",
+                        guide= guide_legend(title = "log of last sold price \nfrom 13.5 to 14.5 \n($730000 to $1982999)")) + 
+  ggtitle("San Francisco Last Sold Price Graph II")
 
-loglow <-qmplot(longitude, latitude, data = sf_data_new %>% filter(log_last_sold_price>=0 & log_last_sold_price <=13.5), colour = log_last_sold_price)+scale_colour_gradient(low = "black",high="lightblue3",na.value="white", guide= guide_legend(title = "log of last sold price \nfrom 0 to 13.5 \n($1 to $729999)"))+ ggtitle("San Francisco Last Sold Price Graph III")
+loglow <-qmplot(longitude, latitude, data = sf_data_new %>%
+                  filter(log_last_sold_price>=0 & log_last_sold_price <=13.5),
+                colour = log_last_sold_price) + 
+  scale_colour_gradient(low = "black",
+                        high="lightblue3",
+                        na.value="white", 
+                        guide= guide_legend(title = "log of last sold price \nfrom 0 to 13.5 \n($1 to $729999)")) + 
+  ggtitle("San Francisco Last Sold Price Graph III")
 
 loghigh
 logmid
@@ -428,11 +506,34 @@ loglow
 # Plot the log(last_sold_price) by location
 ny_data_new <- ny_data %>% filter(!is.na(log_last_sold_price)) 
 
-loghigh <-qmplot(longitude, latitude, data = ny_data_new %>% filter(log_last_sold_price>14), colour = log_last_sold_price)+scale_colour_gradient(low = "red",high="green",guide= guide_legend(title = "log of last sold price \nfrom 14 \n(more than $1200000)")) + ggtitle("New York Last Sold Price Graph I")
+loghigh <-
+  qmplot(longitude, latitude, data = ny_data_new %>%
+           filter(log_last_sold_price>14), 
+         colour = log_last_sold_price) + 
+  scale_colour_gradient(low = "red",
+                        high="green",
+                        guide= guide_legend(title = "log of last sold price \nfrom 14 \n(more than $1200000)")) + 
+  ggtitle("New York Last Sold Price Graph I")
 
-logmid <- qmplot(longitude, latitude, data = ny_data_new %>% filter(log_last_sold_price>13 & log_last_sold_price <=14), colour = log_last_sold_price)+scale_colour_gradient(low = "yellow",high="blue",na.value="white",guide= guide_legend(title = "log of last sold price \nfrom 13 to 14 \n($442000 to $1199999)")) + ggtitle("New York Last Sold Price Graph II")
+logmid <- 
+  qmplot(longitude, latitude, data = ny_data_new %>% 
+           filter(log_last_sold_price>13 & log_last_sold_price <=14), 
+         colour = log_last_sold_price) + 
+  scale_colour_gradient(low = "yellow",
+                        high="blue",
+                        na.value="white",
+                        guide= guide_legend(title = "log of last sold price \nfrom 13 to 14 \n($442000 to $1199999)")) + 
+  ggtitle("New York Last Sold Price Graph II")
 
-loglow <-qmplot(longitude, latitude, data = ny_data_new %>% filter(log_last_sold_price>=0 & log_last_sold_price <=13), colour = log_last_sold_price)+scale_colour_gradient(low = "black",high="lightblue3",na.value="white", guide= guide_legend(title = "log of last sold price \nfrom 0 to 13 \n(below $442000)"))+ ggtitle("New York Last Sold Price Graph III")
+loglow <-
+  qmplot(longitude, latitude, data = ny_data_new %>% 
+           filter(log_last_sold_price>=0 & log_last_sold_price <=13), 
+         colour = log_last_sold_price) + 
+  scale_colour_gradient(low = "black",
+                        high="lightblue3",
+                        na.value="white", 
+                        guide= guide_legend(title = "log of last sold price \nfrom 0 to 13 \n(below $442000)")) + 
+  ggtitle("New York Last Sold Price Graph III")
 
 loghigh
 logmid
@@ -472,47 +573,64 @@ ggplot(data = melted_cor_sf, aes(x=Var1, y=Var2, fill=value, label = value)) +
   labs(title = "Correlation of variables in SF data")
 
 # Evaluate the correlation between categorical variable with the numerica values in SF
-yr_home <-ggplot(data= sf_data, aes(factor(home_type), year_built)) + 
+yr_home <-
+  ggplot(data= sf_data, aes(factor(home_type), year_built)) + 
   geom_boxplot(aes(fill=home_type), alpha=0.7) +
   ylab("year built") + 
   xlab("") + 
   theme(axis.line=element_blank(),
         axis.text.x=element_blank())
 
-loca_home <- ggplot(data= sf_data, 
-                    aes(factor(home_type), as.numeric(location_cluster))) + 
+loca_home <- 
+  ggplot(data= sf_data, aes(factor(home_type), as.numeric(location_cluster))) + 
   geom_boxplot(aes(fill=home_type), alpha=0.7) + 
   ylab("location cluster") + 
   xlab("") + 
   theme(axis.line=element_blank(), axis.text.x = element_blank())
 
-bath_home <- ggplot(data= sf_data, aes(factor(home_type), bathrooms)) +
+bath_home <- 
+  ggplot(data= sf_data, aes(factor(home_type), bathrooms)) +
   geom_boxplot(aes(fill=home_type), alpha=0.7) + 
   xlab("home type") + 
   theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-bed_home <- ggplot(data = sf_data, aes(factor(home_type), bedrooms)) +
+bed_home <- 
+  ggplot(data = sf_data, aes(factor(home_type), bedrooms)) +
   geom_boxplot(aes(fill=home_type), alpha=0.7) + 
   xlab("home type") + 
   theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-date_home <- ggplot(data = sf_data, aes(factor(home_type), last_sold_date)) + 
+date_home <- 
+  ggplot(data = sf_data, aes(factor(home_type), last_sold_date)) + 
   geom_boxplot(aes(fill=home_type), alpha=0.7) + 
   ylab("last sold date") + 
   xlab("") + 
   theme(axis.line=element_blank(), axis.text.x=element_blank()) + 
   theme(legend.position = "none")
 
-tax_home <- ggplot(data= sf_data, aes(factor(home_type), log_tax_value)) + 
+tax_home <- 
+  ggplot(data= sf_data, aes(factor(home_type), log_tax_value)) + 
   geom_boxplot(aes(fill=home_type), alpha=0.7) + 
   ylab("log tax value") + 
   xlab("") + 
   theme(axis.line=element_blank(),axis.text.x=element_blank()) + 
   theme(legend.position = "none")
 
-size_home <- ggplot(data= sf_data, aes(factor(home_type), log_home_size)) + geom_boxplot(aes(fill=home_type), alpha=0.7) + ylab("log home size")+xlab("home type") +theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+size_home <- 
+  ggplot(data= sf_data, aes(factor(home_type), log_home_size)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  ylab("log home size")+xlab("home type") +theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
 
-property_home <- ggplot(data= sf_data %>% filter(!is.na(log_property_size)), aes(factor(home_type), log_property_size)) + geom_boxplot(aes(fill=home_type), alpha=0.7) + ylab("log property size")+xlab("home type") +theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+property_home <- 
+  ggplot(data= sf_data %>% 
+           filter(!is.na(log_property_size)), 
+         aes(factor(home_type), log_property_size)) + 
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  ylab("log property size") + 
+  xlab("home type") + 
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank()) +
+  theme(legend.position = "none")
 
 # Make those plots share the legend to save space
 grid_arrange_shared_legend <- function(...) {
@@ -527,9 +645,9 @@ grid_arrange_shared_legend <- function(...) {
         ncol = 1,
         heights = unit.c(unit(1, "npc") - lheight, lheight))
 }
+
 grid_arrange_shared_legend(date_home, tax_home, size_home, property_home)
 grid_arrange_shared_legend(yr_home, loca_home, bath_home, bed_home)
-
 ```
 
 
@@ -561,26 +679,66 @@ ggplot(data = melted_cor_ny, aes(x=Var1, y=Var2, fill=value, label = value)) +
   labs(title = "Correlation of variables in NY data")
 
 #evaluate the correlation between categorical variable with the numerica values in NY
-yr_home <-ggplot(data= ny_data, aes(factor(home_type), year_built)) + geom_boxplot(aes(fill=home_type), alpha=0.7) +ylab("year built") +xlab("")+theme(axis.line=element_blank(),axis.text.x=element_blank())
+yr_home <-
+  ggplot(data= ny_data, aes(factor(home_type), year_built)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) +
+  ylab("year built") +
+  xlab("") + 
+  theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-loca_home <- ggplot(data= ny_data, aes(factor(home_type), as.numeric(location_cluster))) + geom_boxplot(aes(fill=home_type), alpha=0.7) + ylab("location cluster")+xlab("")+theme(axis.line=element_blank(),axis.text.x=element_blank())
+loca_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), as.numeric(location_cluster))) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  ylab("location cluster") +
+  xlab("") +
+  theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-bath_home <- ggplot(data= ny_data, aes(factor(home_type), bathrooms)) + geom_boxplot(aes(fill=home_type), alpha=0.7) +xlab("home type") +theme(axis.line=element_blank(),axis.text.x=element_blank())
+bath_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), bathrooms)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  xlab("home type") + 
+  theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-bed_home <- ggplot(data= ny_data, aes(factor(home_type), bedrooms)) + geom_boxplot(aes(fill=home_type), alpha=0.7) +xlab("home type") +theme(axis.line=element_blank(),axis.text.x=element_blank())
+bed_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), bedrooms)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) +
+  xlab("home type") + 
+  theme(axis.line=element_blank(), axis.text.x=element_blank())
 
-date_home <- ggplot(data= ny_data, aes(factor(home_type), last_sold_date)) + geom_boxplot(aes(fill=home_type), alpha=0.7) +ylab("last sold date") +xlab("")+theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+date_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), last_sold_date)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) +
+  ylab("last sold date") +
+  xlab("") +
+  theme(axis.line=element_blank(),axis.text.x=element_blank()) +
+  theme(legend.position = "none")
 
-tax_home <- ggplot(data= ny_data, aes(factor(home_type), log_tax_value)) + geom_boxplot(aes(fill=home_type), alpha=0.7) +ylab("log tax value") +xlab("")+theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+tax_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), log_tax_value)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) +
+  ylab("log tax value") +
+  xlab("") +
+  theme(axis.line=element_blank(),axis.text.x=element_blank()) +
+  theme(legend.position = "none")
 
-size_home <- ggplot(data= ny_data, aes(factor(home_type), log_home_size)) + geom_boxplot(aes(fill=home_type), alpha=0.7) + ylab("log home size") +
-  theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+size_home <- 
+  ggplot(data= ny_data, aes(factor(home_type), log_home_size)) +
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  ylab("log home size") +
+  theme(axis.line=element_blank(),axis.text.x=element_blank()) +
+  theme(legend.position = "none")
 
-property_home <- ggplot(data= ny_data %>% filter(!is.na(log_property_size)), aes(factor(home_type), log_property_size)) + geom_boxplot(aes(fill=home_type), alpha=0.7) + ylab("log property size") +theme(axis.line=element_blank(),axis.text.x=element_blank())+theme(legend.position = "none")
+property_home <- 
+  ggplot(data= ny_data %>% 
+           filter(!is.na(log_property_size)), 
+         aes(factor(home_type), log_property_size)) + 
+  geom_boxplot(aes(fill=home_type), alpha=0.7) + 
+  ylab("log property size") +
+  theme(axis.line=element_blank(), axis.text.x=element_blank()) +
+  theme(legend.position = "none")
 
 grid_arrange_shared_legend(date_home, tax_home, size_home, property_home)
-grid_arrange_shared_legend(yr_home, loca_home, bath_home, bed_home)
-
+grid_arrange_shared_legend(yr_home, loca_home, bath_home, bed_home) 
 ```
 
 From the heatmaps of the two cities, we could see that the correlation between the numeric variables of in the data set is quite small. Additionally, we don't observe any obvious trend in the figures when examining the correlation between numeric and categorical variables. Therefore, we conclude that there is not large correlation between the predictors in the model.
@@ -1827,14 +1985,35 @@ library(tidyr)
 #sf_neural <- sf_data
 sf_neural <- read.csv("data/sf_neural.csv")
 #colnames(sf_data)
-sf_neural <- sf_neural %>% dplyr::mutate(home_type_cate = as.numeric(as.factor(sf_neural$home_type)))
-sf_neural <- sf_neural %>% dplyr::select(-list, -url, -property_size, -log_last_sold_price, -log_tax_value, -log_home_size, -log_property_size, -home_type, -zillow_id)
-sf_neural$last_sold_date<- as.numeric(sf_neural$last_sold_date)
-sf_neural$location_cluster<-as.numeric(sf_neural$location_cluster)
-sf_neural$zipcode <-as.numeric(as.factor(sf_neural$zipcode))
-sf_neural <- sf_neural %>% dplyr::select(c(zipcode,year_built,bathrooms,bedrooms,last_sold_date,tax_year,tax_value,home_size,home_type_cate,last_sold_price))
+sf_neural <- sf_neural %>% 
+  dplyr::mutate(home_type_cate = as.numeric(as.factor(sf_neural$home_type)))
+sf_neural <- sf_neural %>% 
+  dplyr::select(-list, 
+                -url, 
+                -property_size, 
+                -log_last_sold_price, 
+                -log_tax_value, 
+                -log_home_size, 
+                -log_property_size, 
+                -home_type, 
+                -zillow_id)
+sf_neural$last_sold_date <- as.numeric(sf_neural$last_sold_date)
+sf_neural$location_cluster <-as.numeric(sf_neural$location_cluster)
+sf_neural$zipcode <- as.numeric(as.factor(sf_neural$zipcode))
+
+sf_neural <- sf_neural %>%
+  dplyr::select(c(zipcode,
+                  year_built,
+                  bathrooms,
+                  bedrooms,
+                  last_sold_date,
+                  tax_year,
+                  tax_value,
+                  home_size,
+                  home_type_cate,
+                  last_sold_price))
 set.seed(1)
-index <- sample(1:nrow(sf_neural),nrow(sf_neural)*0.8)
+index <- sample(1:nrow(sf_neural), nrow(sf_neural)*0.8)
 
 maxs <- apply(sf_neural,2,max)
 mins <- apply(sf_neural,2,min)
@@ -1845,7 +2024,9 @@ test<- scaled[-index,]
 
 n <- names(train)
 
-f<-as.formula(paste("last_sold_price ~", paste(n[!n%in% "last_sold_price"],collapse = "+")))
+f<-as.formula(paste("last_sold_price ~", 
+                    paste(n[!n%in% "last_sold_price"],
+                          collapse = "+")))
 nn_sf <- neuralnet(f, data=train,hidden=c(4), stepmax = 2e5, linear.output = T)
 
 #nn_sf <- neuralnet(last_sold_price~zipcode+year_built+bathrooms+bedrooms+last_sold_date+tax_value+home_size, data=train,hidden=c(5,3), linear.output = T)
@@ -1861,15 +2042,27 @@ plot(nn_sf)
 
 ```{r}
 pr.nn <- compute(nn_sf,test[,1:9])
-pr.nn <- pr.nn$net.result*(max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price))+min(sf_neural$last_sold_price)
-test.r <- (test$last_sold_price) * (max(sf_neural$last_sold_price)-min(sf_neural$last_sold_price))+min(sf_neural$last_sold_price)
+pr.nn <- 
+  pr.nn$net.result * 
+  (max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price)) +
+  min(sf_neural$last_sold_price)
+test.r <- 
+  (test$last_sold_price) *
+  (max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price)) +
+  min(sf_neural$last_sold_price)
 # TEST
 MSE_test <- (RMSE(test.r, pr.nn))^2
 RMSE_test_nn <- (sum(test.r - pr.nn)^2/nrow(test))^(1/2)
 
 prt.nn <- compute(nn_sf,train[,1:9])
-prt.nn <- prt.nn$net.result*(max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price))+min(sf_neural$last_sold_price)
-train.r <- (train$last_sold_price) * (max(sf_neural$last_sold_price)-min(sf_neural$last_sold_price))+min(sf_neural$last_sold_price)
+prt.nn <- 
+  prt.nn$net.result * 
+  (max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price)) +
+  min(sf_neural$last_sold_price)
+train.r <- 
+  (train$last_sold_price) * 
+  (max(sf_neural$last_sold_price) - min(sf_neural$last_sold_price)) +
+  min(sf_neural$last_sold_price)
 
 # TRAIN
 MSE_train <- (RMSE(train.r, prt.nn))^2
@@ -1892,19 +2085,48 @@ lines(prt.nn,col=2)
 
 ```{r}
 #sf_original_data <- sf_data
-sf_original_data <- read.csv("data/sf_neural.csv") %>% dplyr::select(c(zillow_id,latitude,longitude,year_built,bathrooms,bedrooms,
-                                                           last_sold_date,last_sold_price,home_type,tax_year,
-                                                           tax_value,home_size,zipcode,list,url,property_size))
-sf_pred_test <- sf_original_data %>% slice(as.numeric(row.names(pr.nn))) %>% mutate(prediction = pr.nn)
-sf_pred_train <- sf_original_data %>% slice(as.numeric(row.names(prt.nn))) %>% mutate(prediction = prt.nn)
-sf_pred <-rbind(sf_pred_test,sf_pred_train)
+sf_original_data <- read.csv("data/sf_neural.csv") %>%  
+  dplyr::select(c(zillow_id,
+                  latitude,
+                  longitude,
+                  year_built,
+                  bathrooms,
+                  bedrooms,
+                  last_sold_date,
+                  last_sold_price,
+                  home_type,
+                  tax_year,
+                  tax_value,
+                  home_size,
+                  zipcode,
+                  list,
+                  url,
+                  property_size))
+
+sf_pred_test <- 
+  sf_original_data %>% 
+  slice(as.numeric(row.names(pr.nn))) %>% 
+  mutate(prediction = pr.nn)
+sf_pred_train <- 
+  sf_original_data %>% 
+  slice(as.numeric(row.names(prt.nn))) %>% 
+  mutate(prediction = prt.nn)
+
+sf_pred <- rbind(sf_pred_test, sf_pred_train)
 #write.csv(sf_pred, "sf_prediction.csv",row.names = FALSE)
 ```
 
 From the above figures, we do see that neural network produces good prediction results. We further compare the `RMSE` produced by this model and those produced by the previous models.
 
 ```{r}
-Model_results_sf <- dplyr::bind_rows(Model_results_sf, Model_results_imputed_sf, data.frame(Model = "Neural Network", R_square = "NA", adjusted_R_square = "NA", RMSE_train = RMSE_train_nn, RMSE_test = RMSE_test_nn, p_lrtest_vs_last_model = "NA"))
+Model_results_sf <- dplyr::bind_rows(Model_results_sf, 
+                                     Model_results_imputed_sf, 
+                                     data.frame(Model = "Neural Network", 
+                                                R_square = "NA", 
+                                                adjusted_R_square = "NA",
+                                                RMSE_train = RMSE_train_nn,
+                                                RMSE_test = RMSE_test_nn,
+                                                p_lrtest_vs_last_model = "NA"))
 Model_results_sf %>% kable
 ```
 
