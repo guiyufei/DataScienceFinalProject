@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>New York or San Fan</title>
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+</head>
+<link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
+
+<body id="page-top">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Data Science</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="#intro">Home</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#background">Background</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#overview">Overview</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#exploratory">Analysis</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#model">Modeling</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#results">Results</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#application">Video</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="https://github.com/guiyufei/DataScienceFinalProject.git">GitHub</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+<header>
+    <section id="intro">
+        <div class="header-content">
+            <div class="header-content-inner">
+            <h1 style="font-size:50%;">San Francisco or New York?</h1>
+            <h2>Predict and Compare the housing price of San Francisco and New York City.<br>Data aquired from Zillow's API</h2>
+            </div>
+            <a href="#background" class="page-scroll btn btn-circle">
+                <i class="fa fa-angle-down fa-5x animated"></i>
+            </a>
+
+        </div>
+    </section>
+</header>
+
+
+<section id="background">
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <div class="wow bounceInUp" data-wow-delay="0.4s">
+                        <h2 class="section-heading">Background</h2>
+
+
+
+                    <p class="lead">
+                        Although looking for a home that is right for you largely comes down to personal preferences, the two cities on the east and west coast in the US - New York City and San Francisco - should always be on home-buyers’ top lists.
+                        In our project, we will give you insights into the real estate prices in New York and San Francisco. Meanwhile, we are also interested in comparing important factors that influence the house prices between two cities.</p>
+                    <br>
+                </div>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <div class="wow bounceInUp" data-wow-delay="0.4s">
+                    <img class="img-responsive" src="img/sfhousing.jpg" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+            <br><br><br>
+            <br>
+
+        </div>
+
+
+        <!-- /.container -->
+
+    </div>
+
+</section>
+
+<section id="overview">
+    <div class="content-section-b">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                <h2 class="section-heading">Project Overview</h2>
+                <br>
+                <br>
+                <br>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="wow bounceInUp" data-wow-delay="0.2s">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
+                </span>
+                <h3 class="sub-heading">Get the data</h3>
+                <p class="text-muted">Scrapping address and listing price list from Zillow website through R and calling Zillow API to get the detailed property data through python.</p>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="wow bounceInUp" data-wow-delay="0.3s">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-bar-chart fa-stack-1x fa-inverse"></i>
+                </span>
+                <h3 class="sub-heading">Explore and Clean</h3>
+                <p class="text-muted">Doing basic statistical analysis including outliers checking, correlation checking, data imputing, and etc.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="wow bounceInUp" data-wow-delay="0.4s">
+                <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                </span>
+                <h3 class="sub-heading">Model Building and Results</h3>
+                <p class="text-muted">Fitting different models including linear regression model, random forest, and neural network and decide optimal final model</p>
+                </div>
+            </div>
+
+        </div>
+        <br><br><br><br><br><br><br>
+    </div>
+</section>
+
+<section id="exploratory">
+    <div class="content-section-a">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                    <h2 class="section-heading">Exploratory Data Analysis</h2>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h4>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Step 1: Assessment of Missingness</h4>
+                <p class="text-muted">Since the data is collected from Zillow, there are a lot of missingness in the data set we got. We now assess the missingness of our data to get a general idea of the completeness of our data.</p>
+                <br><br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfmissing.png" alt="">
+                <br><br>
+                <p class="text-muted">Missingness of San Francisco housing data</p>
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nymissing.png" alt="">
+                <br><br>
+                <p class="text-muted">Missingness of New York housing data</p>
+
+            </div>
+            <br><br>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h4>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Step 2: Check the distributions of different variables</h4>
+                <p class="text-muted">We then conduct exploratory data analysis over the variables in the data set to see whether there still exists outliers that may become influential points in the future model building stage.</p>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfdist.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of all San Francisco housing variables</p>
+
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nydist.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of all New York housing variables</p>
+            </div>
+        <br><br>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h4>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Step 3: Real Estates Clusters based on Location</h4>
+                <p class="text-muted">Since longitude and latitude of the housing information could not be directly used in the models (magnitude of those values doesn’t make sense), we run k-means on these two variables to cluster the houses in the two cities according to their geographic location.
+                    To find the optimal k in the k-means method, we want to find the k that minimizes the within cluster sum of squares. Here, we tried different values of k in the two cities and pick the minimum k that could keep the within cluster sum of squares within a reasonable scale.</p>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfcluster.png" alt="">
+                <br><br>
+                <p class="text-muted">San Francisco</p>
+
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nycluster.png" alt="">
+                <br><br>
+                <p class="text-muted">New York</p>
+            </div>
+        <br><br>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <p class="text-muted">According to the above plots, we see that when k is greater than 15, the within cluster sum of squares won’t decrease much in magnitude, so we choose k as 15. Then we run k-means on the date set in both cities and merge the cluster results into the original data set.</p>
+            </div>
+            <br><br>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sflocation.png" alt="">
+                <br><br>
+                <p class="text-muted">Cluster according to the location for San Francisco</p>
+
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nylocation.png" alt="">
+                <br><br>
+                <p class="text-muted">Cluster according to the location for New York</p>
+            </div>
+            <br><br>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h4>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Step 4: Explorative Graphs for the Last Sold Price`</h4>
+                <p class="text-muted">Here we want to get a general idea of the distribution of the outcome - last_sold_price over the region in the two cities. Since we already see that last_sold_price need log transformation in previous parts, we plot last_sold_price in log scale over the location of the real estates in the two cities. Becuase there are too many properties in a relatively small area in both cities, we seperate those properites according to their sold prices into three groups, and plot them seperately.</p>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfprice1.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price more than $1983000 for San Francisco</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfprice2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price between $730000 to $1983000 for San Francisco</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfprice3.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price less than $730000 for San Francisco</p>
+            </div>
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyprice1.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price more than $1200000 for New York</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyprice2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price between $442000 to $1200000 for New York</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyprice3.png" alt="">
+                <br><br>
+                <p class="text-muted">Distributions of properties price less than $442000 for New York</p>
+            </div>
+            <br><br>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h4>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    Step 5: Check the correlations between different variables</h4>
+                <p class="text-muted">From the heatmaps of the two cities, we could see that the correlation between the numeric variables of in the data set is quite small. Additionally, we don’t observe any obvious trend in the figures when examining the correlation between numeric and categorical variables. Therefore, we conclude that there is not large correlation between the predictors in the model.</p>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfcorr1.png" alt="">
+                <br><br>
+                <p class="text-muted">Correlations between continuous variables for San Francisco</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfcorr2.png" alt="">
+                <br><br>
+                <p class="text-muted">Box plot for categorical variables for San Francisco part I</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfcorr3.png" alt="">
+                <br><br>
+                <p class="text-muted">Box plot for categorical variables for San Francisco part II</p>
+            </div>
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nycorr1.png" alt="">
+                <br><br>
+                <p class="text-muted">Correlations between continuous variables for New York</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nycorr2.png" alt="">
+                <br><br>
+                <p class="text-muted">Box plot for categorical variables for New York part I</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nycorr3.png" alt="">
+                <br><br>
+                <p class="text-muted">Box plot for categorical variables for New York part II</p>
+            </div>
+            <br><br>
+        </div>
+
+
+    </div>
+</section>
+<section id="model">
+    <div class="content-section-b">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                    <h2 class="section-heading">Model Building</h2>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Model 1: Linear Regression</h3>
+                <p class="text-muted">For linear regression model building, we first see whether transformed outcome or transformed predictors could produce better results. And then we add quadratic, two-way interactions and higher order terms to the model to find the final model.</p>
+                <br><br><br>
+                <h3>San Francisco</h3>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Results of different linear models for San Francisco</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/sflinear.png" alt="">
+                <br><br>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Final linear regression model for San Francisco</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/sflinearmodel.png" alt="">
+                <br><br>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Variables of importance of final linear regression model for San Francisco</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/sflinear3.png" alt="">
+                <br><br>
+                <h3>New York City</h3>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Results of different linear models for New York</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/nylinear1.png" alt="">
+                <br><br>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Final linear regression model for New York</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/nylinear2.png" alt="">
+                <br><br>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Variables of importance of final linear regression model for New York</h4>
+                <br>
+                <img class = "fancybox" width="80%" src="img/nylinear3.png" alt="">
+                <br><br><br><br>
+
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Model 2: Neural Network</h3>
+                <p class="text-muted">We use the same train set and test set as before to input into neural network for the convenience of later comparison between the performance of the models. We tried many different parameters in the neural network and here, here we only present the model providing us with the best prediction result (smallest RMSE in the test set and train set) since the runtime of neural net work is very long.</p>
+                <br><br>
+                <h3>San Francisco</h3>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Neural Network for San Francisco</h4>
+                <br>
+                <img class = "fancybox" width="60%" src="img/sfneural.png" alt="">
+                <br><br><br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfneural1.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison between predicted value and actual value in test data set</p>
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfneural2.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison between predicted value and actual value in train data set</p>
+            </div>
+
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h3>New York City</h3>
+                <h4><i class="fa fa-cog" aria-hidden="true"></i>
+                    Neural Network for New York City</h4>
+                <br><br>
+                <img class = "fancybox" width="60%" src="img/nyneural.png" alt="">
+                <br><br><br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyneural1.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison between predicted value and actual value in test data set</p>
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyneural2.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison between predicted value and actual value in train data set</p>
+            </div>
+
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Compare the models for San Francisco and New York City</h3>
+                <p class="text-muted">We compare the models according to the rooted mean squared error</p>
+                <br><br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfcompare.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison the RMSE of models for San Francisco</p>
+            </div>
+            <div class="col-sm-6 col-md-6 vcenter">
+                <img class = "fancybox" width="80%" src="img/nycompare.png" alt="">
+                <br><br>
+                <p class="text-muted">Comparison the RMSE of models for New York City</p>
+            </div>
+
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Conclusion</h3>
+                <p class="text-muted">From the above figures, we do see that neural network produces good prediction results. We further compare the RMSE produced by this model and those produced by the previous models and found that neural network is the best model.</p>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="results">
+    <div class="content-section-a">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                    <h2 class="section-heading">Results</h2>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <p class="text-muted">We compared the prediction and the actual last sold price in the data set to see the performance of our model. Since the prediction output by neural network varies randomly from time to time, we output one of the prediction results to a csv file and read the prediction results now to evaluate the performance of our model.
+                    We do see that in both cities we got very close results to the actual prices. In San Francisco, we see that neural network captures the major trends in the data, and we believe that with more complex model, we will get better prediction results from the model.
+                    We then compare the prediction of our model to the current listing of the properties to see whether our model could provide insights into current listing of the properties and help us to decide whether a certain property is worth buying.</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Neural Network Prediction for San Francisco Housing Price</h3>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfactual.png" alt="">
+                <br><br>
+                <p class="text-muted">Predicted and actual price for all the properties in San Francisco</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfactual2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distribution of currently listing price of all the listed properties in San Francisco</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/sfpred2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distribution of predicted price of all the listed properties in San Francisco</p>
+            </div>
+
+            <br><br>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Neural Network Prediction for New York City Housing Price</h3>
+                <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyactual.png" alt="">
+                <br><br>
+                <p class="text-muted">Predicted and actual price for all the properties in New York</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nyactual2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distribution of currently listing price of all the listed properties in New York City</p>
+            </div>
+            <div class="col-sm-4 col-md-4 vcenter">
+                <img class = "fancybox" width="80%" src="img/nypred2.png" alt="">
+                <br><br>
+                <p class="text-muted">Distribution of predicted price of all the listed properties in New York City</p>
+            </div>
+
+            <br><br>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                    Conclusion</h3>
+                <p class="text-muted">From the above results, we see a similar color trend, which denotes the price of the properties, of the listing and predicted prices in both cities, indicating the good performance of our model. The similar color trend makes intuitive trend since the distribution of the prices of the properties won’t change significantly over time. Additionally, we see that though the color trend in the two figures in both cities are similar, we do see different colors in the two figures of New York while the colors of the two figures of San Francisco are almost the same, which indicates that the housing prices have increased a lot in New York in recent years while those in San Francisco almost remains the same in these years.</p>
+                <br><br><br>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+</section>
+
+<section id="application">
+    <div class="content-section-b">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                    <h2 class="section-heading">Screencast for our project</h2>
+                    <br>
+                    <br>
+                </div>
+                <iframe width="420" height="315"
+                        src="https://www.youtube.com/embed/atlNolTi0rk?autoplay=2">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="content-section-a">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="wow bounceInDown" data-wow-delay="0.1s">
+                    <h2 class="section-heading">About us</h2>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <hr class="marginbot-50">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="wow bounceInUp" data-wow-delay="0.2s">
+                        <div class="team boxed-grey">
+                            <div class="inner">
+                                <h5>Jiabei Yang</h5>
+                                <p class="subtitle">Lead Data Scientist</p>
+                                <div class="avatar"><img src="img/jiabei.png" width="80%" alt="" class="img-responsive img-circle" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="wow bounceInUp" data-wow-delay="0.5s">
+                        <div class="team boxed-grey">
+                            <div class="inner">
+                                <h5>Yufei Gui</h5>
+                                <p class="subtitle">Web developer & Data Analyst</p>
+                                <div class="avatar"><img src="img/yf.PNG" width="80%" alt="" class="img-responsive img-circle" /></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="wow bounceInUp" data-wow-delay="0.8s">
+                        <div class="team boxed-grey">
+                            <div class="inner">
+                                <h5>Zhongzhong Xu</h5>
+                                <p class="subtitle">Lead Data Analyst</p>
+                                <div class="avatar"><img src="img/zz.jpg" width="80%" alt="" class="img-responsive img-circle" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 text-center">
+                <a href="#intro" class="page-scroll btn btn-circle">
+                    <i class="fa fa-angle-up fa-5x animated"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/scroll.js"></script>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+<script src="js/fancyboxclick.js"></script>
+
+</body>
+</html>
